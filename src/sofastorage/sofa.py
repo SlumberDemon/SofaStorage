@@ -31,7 +31,7 @@ class SofaStorage:
             raise ValueError("Username and password can't be the same!")
         try:
             base = Deta(key).Base(f'{username}_{password}')
-            sofa = base.put(item='', key='.sofa')
+            sofa = base.put({'item': ' '}, key='.sofa')
             if sofa:
                 return cls.login(username, password, base)
             if not silent:
