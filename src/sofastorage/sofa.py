@@ -18,7 +18,7 @@ class SofaStorage:
     def test(self):
         print('[↓] Testing')
         try:
-            print('[✔] {KEY}')
+            print(f'[✔] {KEY}')
         except:
             print('[⨯] Key not working')
         print('[✔] Test complete')
