@@ -15,8 +15,8 @@ class SofaStorage:
             print(prompt)
 
     @classmethod
-    def create(cls, username: str, password: str, base: str = None, silent: bool = False):
-        key = base if base else KEY
+    def create(cls, username: str, password: str, private: str = None, silent: bool = False):
+        key = private if private else KEY
         if len(username) < 5:
             raise ValueError("Use at least 5 characters!")
         if password == KEY:
@@ -37,8 +37,8 @@ class SofaStorage:
             raise ValueError("Used an invalid login token!")
 
     @classmethod
-    def login(cls, username: str, password: str, base: str = None, silent: bool = False):
-        key = base if base else KEY
+    def login(cls, username: str, password: str, private: str = None, silent: bool = False):
+        key = private if private else KEY
         try:
             base = Deta(key).Base(f'{username}_{password}')
             sofa = base.get(key='.sofa')
