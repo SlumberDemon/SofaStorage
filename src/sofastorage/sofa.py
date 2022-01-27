@@ -18,8 +18,9 @@ class SofaStorage:
     @classmethod
     def test(self):
         key = KEY
-        print('[↓] Testing')
         
+        print('[↓] Testing')
+
         try:
             print(f'[↳] {KEY}')
         except:
