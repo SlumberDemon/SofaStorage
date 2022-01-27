@@ -1,5 +1,6 @@
 from .key import KEY
 from deta import Deta
+from typing import Union
 
 class SofaStorage:
     def __init__(self, base: Deta.Base, silent: bool = False):
@@ -12,6 +13,18 @@ class SofaStorage:
     def __log(self, prompt: str) -> None:
         if not self.silent:
             print(prompt)
+
+    def sofa_put(username, password, item, deta, key):
+        self._log(f'[↑] Uploading | {item} | ...')
+        sofa = deta.Base(f'{username}-{password}')
+        sofa.put({'item': item}, key)
+        self._log(f'[•] Completed | {item} |')
+
+    def sofa_get(username, password, deta, key):
+        self._log(f'[↓] Fetching | {key} | ...')        
+        sofa = deta.Base(f'{username}-{password}')
+        sofa.get(key)
+        self._log(f'[•] Completed | {key} |')
 
     @classmethod
     def test(cls):
@@ -31,8 +44,8 @@ class SofaStorage:
         if username == password:
             raise ValueError("Username and password can't be the same!")
         try:
-            base = Deta(key).Base(f'{username}{password}')
-            sofa = base.put({'item': '.sofa'}, key='.sofa')
+            base = SofaStorage.sofa_put(username, password, item=['.sofa'], deta=private, key='.sofa')
+            sofa = SofaStorage.sofa_get(username, password, private, key='.sofa')
             if sofa:
                 return cls.login(username, password, base)
             if not silent:
@@ -72,8 +85,9 @@ class SofaStorage:
         if username == password:
             raise ValueError("Username and password can't be the same!")
         try:
-            base = Deta(key).Base(f'{username}_{password}')
-            sofa = base.put({'item': '.sofa'}, key='.sofa')
+            base = Deta(key).Base(f'{username}-{password}')
+            storage = base.put({'item': '.sofa'}, key='.sofa')
+            sofa = base.get(key='.sofa')
             if sofa:
                 return cls.login(username, password, base)
             if not silent:
@@ -86,7 +100,7 @@ class SofaStorage:
     def login(cls, username: str, password: str, private: str = None, silent: bool = False):
         key = private if private else KEY
         try:
-            base = Deta(key).Base(f'{username}{password}')
+            base = Deta(key).Base(f'{username}-{password}')
             sofa = base.get(key='.sofa')
             if sofa:
                 if not silent:
