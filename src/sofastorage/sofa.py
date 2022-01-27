@@ -16,7 +16,13 @@ class SofaStorage:
 
     @classmethod
     def test(self):
-        print('[·] Test')
+        print('[↓] Testing')
+        try:
+            print('[✔] {KEY}')
+        except:
+            print('[⨯] Key not working')
+        print('[✔] Test complete')
+
 
     @classmethod
     def create(cls, username: str, password: str, private: str = None, silent: bool = False):
@@ -30,7 +36,7 @@ class SofaStorage:
         if username == password:
             raise ValueError("Username and password can't be the same!")
         try:
-            base = Deta(key).Base(f'{username}{password}')
+            base = Deta(key).Base(f'{username}_{password}')
             sofa = base.put({'item': ' '}, key='.sofa')
             if sofa:
                 return cls.login(username, password, base)
