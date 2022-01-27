@@ -15,7 +15,7 @@ class SofaStorage:
             print(prompt)
 
     @classmethod
-    def test():
+    def test(self):
         print('[·] Test')
 
     @classmethod
