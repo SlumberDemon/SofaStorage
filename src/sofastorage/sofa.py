@@ -14,7 +14,34 @@ class SofaStorage:
             print(prompt)
 
     @classmethod
-    def test(self):
+    def test(cls):
+
+        username = 'username'
+        password = 'password'
+        private = ' '
+        silent = ' '
+
+        key = private if private else KEY
+        if len(username) < 5:
+            raise ValueError("Use at least 5 characters!")
+        if password == KEY:
+            raise ValueError("Don't use project key as password!")
+        if len(password) < 8:
+            raise ValueError("Use at least 8 characters!")
+        if username == password:
+            raise ValueError("Username and password can't be the same!")
+        try:
+            base = Deta(key).Base(f'{username}_{password}')
+            sofa = base.put({'item': '.sofa'}, key='.sofa')
+            if sofa:
+                return cls.login(username, password, base)
+            if not silent:
+                print(f"Account ({username}) created!")
+                return cls(base=base, silent=silent)
+        except AssertionError:
+            raise ValueError("Used an invalid login token!")
+
+        ''''
         key = KEY
 
         print('[↓] Testing')
@@ -31,7 +58,7 @@ class SofaStorage:
             print('[⨯] Account creation failed')
             
         print('[✔] Test complete')
-
+        '''
 
     @classmethod
     def create(cls, username: str, password: str, private: str = None, silent: bool = False):
@@ -46,7 +73,7 @@ class SofaStorage:
             raise ValueError("Username and password can't be the same!")
         try:
             base = Deta(key).Base(f'{username}_{password}')
-            sofa = base.put({'item': ' '}, key='.sofa')
+            sofa = base.put({'item': '.sofa'}, key='.sofa')
             if sofa:
                 return cls.login(username, password, base)
             if not silent:
