@@ -31,7 +31,6 @@ class SofaStorage:
             base = Deta(key).Base(f'{username}-{password}')
             storage = base.put({'item': '.sofa'}, key='.sofa')
             sofa = base.get(key='.sofa')
-            sofa = ()
             if sofa:
                 return cls.login(username, password, base)
             if not silent:
