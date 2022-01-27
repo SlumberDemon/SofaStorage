@@ -18,7 +18,7 @@ class SofaStorage:
 
         username = 'username'
         password = 'password'
-        private = ' '
+        private = KEY
         silent = ' '
 
         key = private if private else KEY
