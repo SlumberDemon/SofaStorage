@@ -15,16 +15,16 @@ class SofaStorage:
             print(prompt)
 
     def sofa_put(username, password, item, deta, key):
-        self._log(f'[↑] Uploading | {item} | ...')
+        SofaStorage.__log(f'[↑] Uploading | {item} | ...')
         sofa = deta.Base(f'{username}-{password}')
         sofa.put({'item': item}, key)
-        self._log(f'[•] Completed | {item} |')
+        SofaStorage.__log(f'[•] Completed | {item} |')
 
     def sofa_get(username, password, deta, key):
-        self._log(f'[↓] Fetching | {key} | ...')        
+        SofaStorage.__log(f'[↓] Fetching | {key} | ...')        
         sofa = deta.Base(f'{username}-{password}')
         sofa.get(key)
-        self._log(f'[•] Completed | {key} |')
+        SofaStorage.__log(f'[•] Completed | {key} |')
 
     @classmethod
     def test(cls):
