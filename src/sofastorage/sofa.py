@@ -1,4 +1,4 @@
-from .key import KEY
+from src.sofastorage.key import KEY
 from deta import Deta
 from typing import Union
 
