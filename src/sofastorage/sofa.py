@@ -16,7 +16,7 @@ class SofaStorage:
         username = 'username'
         password = 'password'
         private = KEY
-        silent = ' '
+        silent = False
 
         key = private if private else KEY
         if len(username) < 5:
