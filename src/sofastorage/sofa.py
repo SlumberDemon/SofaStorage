@@ -26,7 +26,7 @@ class SofaStorage:
         if username == password:
             raise ValueError("Username and password can't be the same!")
         try:
-            base = Deta(Key).Base(f'{username}_{password}')
+            base = Deta(key).Base(f'{username}_{password}')
             if not silent:
                 print(f"Account ({username}) created!")
                 return cls(base=base, silent=silent)
