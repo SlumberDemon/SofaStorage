@@ -8,7 +8,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='sofastorage',
-    version='0.0.6',
+    version='0.0.7',
     description='Easy to use password manager',
     long_description=long_description,
     long_description_content_type='text/markdown',

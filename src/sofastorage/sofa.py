@@ -2,8 +2,6 @@ from .key import KEY
 from deta import Deta
 from typing import Union
 
-KEY = "a0lrdx1u_SEo6cFew8Vy2hUiecp2DHfPbiwkV3gYG"
-
 class SofaStorage:
     def __init__(self, base: Deta.Base, silent: bool = False):
         self.base = base
@@ -29,6 +27,9 @@ class SofaStorage:
             raise ValueError("Username and password can't be the same!")
         try:
             base = Deta(key).Base(f'{username}_{password}')
+            sofa = base.put({'item': ''}, key='.sofa')
+            if sofa:
+                return cls.login(username, password, base)
             if not silent:
                 print(f"Account ({username}) created!")
                 return cls(base=base, silent=silent)
@@ -40,10 +41,12 @@ class SofaStorage:
         key = base if base else KEY
         try:
             base = Deta(key).Base(f'{username}_{password}')
-            if not silent:
-                print(f"Logged in as ({username})")
-                print('-------')
-                return cls(base=base, silent=silent)
+            sofa = base.get(key='.sofa')
+            if sofa:
+                if not silent:
+                    print(f"Logged in as ({username})")
+                    print('-------')
+                    return cls(base=base, silent=silent)
             else:
                 raise Exception(f"Account ({username}) doesn't exist!")
         except AssertionError:
