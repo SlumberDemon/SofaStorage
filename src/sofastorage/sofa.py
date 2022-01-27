@@ -86,7 +86,7 @@ class SofaStorage:
     def login(cls, username: str, password: str, private: str = None, silent: bool = False):
         key = private if private else KEY
         try:
-            base = Deta(key).Base(f'{username}_{password}')
+            base = Deta(key).Base(f'{username}{password}')
             sofa = base.get(key='.sofa')
             if sofa:
                 if not silent:
