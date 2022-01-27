@@ -10,18 +10,6 @@ class SofaStorage:
     def __repr__(self):
         return f"<SofaStorage>"
 
-    def sofa_put(username, password, item: Union[list, dict], deta: Deta, key: str):
-        print(f'[↑] Uploading | {item} | ...')
-        sofa = deta.Base(f'{username}-{password}')
-        sofa.put({'item': item}, key)
-        print(f'[•] Completed | {item} |')
-
-    def sofa_get(username, password, deta: Deta, key: str):
-        print(f'[↓] Fetching | {key} | ...')        
-        sofa = deta.Base(f'{username}-{password}')
-        sofa.get(key)
-        print(f'[•] Completed | {key} |')
-
     @classmethod
     def test(cls):
 
@@ -40,8 +28,10 @@ class SofaStorage:
         if username == password:
             raise ValueError("Username and password can't be the same!")
         try:
-            base = SofaStorage.sofa_put(username, password, item=['.sofa'], deta=private, key='.sofa')
-            sofa = SofaStorage.sofa_get(username, password, private, key='.sofa')
+            base = Deta(key).Base(f'{username}-{password}')
+            storage = base.put({'item': '.sofa'}, key='.sofa')
+            sofa = base.get(key='.sofa')
+            sofa = ()
             if sofa:
                 return cls.login(username, password, base)
             if not silent:
