@@ -3,8 +3,8 @@ from deta import Deta
 from typing import Union
 
 class SofaStorage:
-    def __init__(self, drive: Deta.Drive, silent: bool = False):
-        self.drive = drive
+    def __init__(self, base: Deta.Base, silent: bool = False):
+        self.base = base
         self.silent = silent
 
     def __repr__(self):
