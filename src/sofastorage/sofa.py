@@ -1,3 +1,4 @@
+import requests
 from .key import KEY
 from deta import Deta
 from typing import Union
