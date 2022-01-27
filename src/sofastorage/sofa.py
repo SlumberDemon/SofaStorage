@@ -1,7 +1,5 @@
-import requests
 from .key import KEY
 from deta import Deta
-from typing import Union
 
 class SofaStorage:
     def __init__(self, base: Deta.Base, silent: bool = False):
@@ -18,7 +16,7 @@ class SofaStorage:
     @classmethod
     def test(self):
         key = KEY
-        
+
         print('[↓] Testing')
 
         try:
