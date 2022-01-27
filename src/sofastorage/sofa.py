@@ -10,21 +10,17 @@ class SofaStorage:
     def __repr__(self):
         return f"<SofaStorage>"
 
-    def __log(self, prompt: str) -> None:
-        if not self.silent:
-            print(prompt)
-
     def sofa_put(username, password, item, deta, key):
-        SofaStorage.__log(f'[↑] Uploading | {item} | ...')
+        print(f'[↑] Uploading | {item} | ...')
         sofa = deta.Base(f'{username}-{password}')
         sofa.put({'item': item}, key)
-        SofaStorage.__log(f'[•] Completed | {item} |')
+        print(f'[•] Completed | {item} |')
 
     def sofa_get(username, password, deta, key):
-        SofaStorage.__log(f'[↓] Fetching | {key} | ...')        
+        print(f'[↓] Fetching | {key} | ...')        
         sofa = deta.Base(f'{username}-{password}')
         sofa.get(key)
-        SofaStorage.__log(f'[•] Completed | {key} |')
+        print(f'[•] Completed | {key} |')
 
     @classmethod
     def test(cls):
