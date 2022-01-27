@@ -1,6 +1,8 @@
-from src.sofastorage.key import KEY
+from .key import KEY
 from deta import Deta
 from typing import Union
+
+KEY = "a0lrdx1u_SEo6cFew8Vy2hUiecp2DHfPbiwkV3gYG"
 
 class SofaStorage:
     def __init__(self, base: Deta.Base, silent: bool = False):
@@ -17,7 +19,6 @@ class SofaStorage:
     @classmethod
     def create(cls, username: str, password: str, base: str = None, silent: bool = False):
         key = base if base else KEY
-        print(key)
         if len(username) < 5:
             raise ValueError("Use at least 5 characters!")
         if password == KEY:
