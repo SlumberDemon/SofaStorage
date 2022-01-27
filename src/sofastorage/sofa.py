@@ -17,11 +17,20 @@ class SofaStorage:
 
     @classmethod
     def test(self):
+        key = KEY
         print('[↓] Testing')
+        
         try:
-            print(f'[✔] {KEY}')
+            print(f'[↳] {KEY}')
         except:
             print('[⨯] Key not working')
+        try:
+            base = Deta(key).Base(f'username_password')
+            sofa = base.put({'item': ' '}, key='.sofa')            
+            print('[↳] Account created')
+        except:
+            print('[⨯] Account creation failed')
+            
         print('[✔] Test complete')
 
 
