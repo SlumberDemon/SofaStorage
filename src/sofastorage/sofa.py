@@ -56,8 +56,8 @@ class SofaStorage:
         except AssertionError:
             raise ValueError("Used an invalid login token!")
 
-    def passwords(self, sofa = '.sofa'):
-        fetch = self.base.fetch({'.sofa': sofa})
+    def passwords(self):
+        fetch = self.base.fetch({'.sofa': '.sofa'})
         for item in fetch.items:
             print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
         return print(f'[•] Found {fetch.count} result(s)')         
