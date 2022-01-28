@@ -1,3 +1,4 @@
+from discord import user
 from .key import KEY
 from deta import Deta
 from typing import Union
@@ -22,6 +23,6 @@ class SofaStorage:
         storage = base.put({'item':'.sofa'}, key='.sofa')
         sofa = base.get(key='.sofa')
         if sofa:
-            print(f'Account ({username}) created')
+            print(f'Logged in as {username}')
         if not silent:
             print(f'Account ({username}) created')
