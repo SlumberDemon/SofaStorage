@@ -32,7 +32,7 @@ class SofaStorage:
             base = Deta(key).Base(f'{username}-{password}')
             sofa = base.get(key='.sofa')
             if sofa:
-                return cls.login(username, password)
+                return cls.login(username, password, private)
             if not silent:
                 print(f'Account ({username}) created!')
             storage = base.put({'item':'.sofa'}, key='.sofa')
