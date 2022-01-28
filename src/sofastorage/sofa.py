@@ -61,10 +61,10 @@ class SofaStorage:
        fetch = self.base.fetch({'.sofa': '.sofa'})
        return fetch.items
 
-    def find(self, website: str, username: str = None, ):
+    def find(self, website: str = None, username: str = None, ):
         if username:
             fetch = self.base.fetch({'username', username})
-        else:
+        if website:
             fetch = self.base.fetch({'website': website})
         self.__log__(fetch.items)
 
