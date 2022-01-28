@@ -62,7 +62,8 @@ class SofaStorage:
         try:
             fetch = self.base.fetch({'.sofa': sofa})
             for item in fetch.items:
-                return print(f'[•] Results | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
+                print(f'[•] | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
+                return print(f'[•] Found ({fetch.count}) results')
         except:
             raise Exception('Deta error')
 
