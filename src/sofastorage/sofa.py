@@ -35,7 +35,7 @@ class SofaStorage:
                 return cls.login(username, password, private, silent)
             if not silent:
                 print(f'Account ({username}) created!')
-            storage = base.put({'item':'.sofa'}, key='.sofa')
+            storage = base.put({'.sofa':'.sofa'}, key='.sofa')
             return cls(base=base, silent=silent)
         except:
             raise ValueError("Used an invalid login token!")
