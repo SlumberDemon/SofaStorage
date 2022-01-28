@@ -31,10 +31,25 @@ class SofaStorage:
             base = Deta(KEY).Base(f'{username}-{password}')
             sofa = base.get(key='.sofa')
             if sofa:
-                print(f'Logged in as {username}')
+                cls.login(f'Logged in as {username}')
             if not silent:
                 print(f'Account ({username}) created!')
             storage = base.put({'item':'.sofa'}, key='.sofa')
             return cls(base=base, silent=silent)
         except:
+            raise ValueError("Used an invalid login token!")
+
+    @classmethod
+    def login(cls, username: str, password: str, silent: bool = False):
+        try:
+            base = Deta(KEY).Base(f'{username}-{password}')
+            sofa = base.get(key='.sofa')
+            if sofa:
+                if not silent:
+                    print(f"Logged in as ({username})")
+                    print('-------')
+                return cls(base=base, silent=silent)
+            else:
+                raise Exception(f"Account ({username}) doesn't exist!")
+        except AssertionError:
             raise ValueError("Used an invalid login token!")
