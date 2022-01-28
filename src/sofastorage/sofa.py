@@ -17,9 +17,11 @@ class SofaStorage:
     
 
     @classmethod
-    def create(cls, username, password):
+    def create(cls, username: str, password: str, silent: bool = False):
         base = Deta(KEY).Base(f'{username}-{password}')
         storage = base.put({'item':'.sofa'}, key='.sofa')
         sofa = base.get(key='.sofa')
         if sofa:
+            print(f'Account ({username}) created')
+        if not silent:
             print(f'Account ({username}) created')
