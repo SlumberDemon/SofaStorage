@@ -62,12 +62,15 @@ class SofaStorage:
        return fetch.items
 
     def find(self, website: str = None, username: str = None, ):
-        if username:
-            fetch = self.base.fetch({'username', username})
-        if website:
-            fetch = self.base.fetch({'website': website})
-        for item in fetch.items:
-            self.__log__(f'[•] Results | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')
+        try:
+            if username:
+                fetch = self.base.fetch({'username', username})
+            if website:
+                fetch = self.base.fetch({'website': website})
+            for item in fetch.items:
+                self.__log__(f'[•] Results | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')
+        except:
+            raise Exception('Missing website or username search query!')
 
     def add(self, username: str, password: str, website: str): 
         '''
