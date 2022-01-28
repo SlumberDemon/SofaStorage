@@ -57,12 +57,10 @@ class SofaStorage:
             raise ValueError("Used an invalid login token!")
 
     def passwords(self, sofa = '.sofa'):
-        try:
-            fetch = self.base.fetch({'.sofa': sofa})
-            for item in fetch.items:
-                return print(f'[•] Results | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
-        except:
-            raise Exception('Deta error')
+        fetch = self.base.fetch({'.sofa': sofa})
+        for item in fetch.items:
+            print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
+        return print(f'[•] Found {fetch.count} result(s)')         
 
     def find(self, website: str = None, username: str = None):
         try:
