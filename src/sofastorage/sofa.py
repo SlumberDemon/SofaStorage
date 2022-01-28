@@ -59,3 +59,11 @@ class SofaStorage:
     def passwords(self) -> list:
         return self.base.fetch({'.sofa': '.sofa'})
 
+    def add(self, username, password, website):
+        '''
+        Username can also be the email
+        '''
+        self.__log__(f'[↑] Uploading | {website} | ...')
+        self.base.insert({'username': username, 'password': password, '.sofa': '.sofa'}, website)
+        self.__log__(f'[•] Completed | {website}')
+
