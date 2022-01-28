@@ -73,7 +73,7 @@ class SofaStorage:
             if website:
                 fetch = self.base.fetch({'website': website})
             for item in fetch.items:
-                print(f'[•] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
+                print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
             return print(f'[•] Found {fetch.count} result(s)')
         except:
             raise Exception('Missing website or username search query!')
