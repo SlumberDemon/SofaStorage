@@ -66,4 +66,3 @@ class SofaStorage:
         self.__log__(f'[↑] Saving | {website} | ...')
         self.base.insert({'username': username, 'password': password, '.sofa': '.sofa'}, website)
         self.__log__(f'[•] Completed | {website} |')
-
