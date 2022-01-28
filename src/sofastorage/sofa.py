@@ -1,3 +1,4 @@
+import re
 from discord import user
 from .key import KEY
 from deta import Deta
@@ -58,8 +59,12 @@ class SofaStorage:
             raise ValueError("Used an invalid login token!")
 
     def passwords(self):
-       fetch = self.base.fetch({'.sofa': '.sofa'})
-       return fetch.items
+        try:
+            fetch = self.base.fetch({'.sofa': '.sofa'})
+            for item in fetch.items:
+                return(f'[•] Results | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
+        except:
+            raise Exception('Deta error')
 
     def find(self, website: str = None, username: str = None, ):
         try:
@@ -68,7 +73,7 @@ class SofaStorage:
             if website:
                 fetch = self.base.fetch({'website': website})
             for item in fetch.items:
-                self.__log__(f'[•] Results | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')
+                return(f'[•] Results | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')
         except:
             raise Exception('Missing website or username search query!')
 
