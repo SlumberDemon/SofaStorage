@@ -40,6 +40,7 @@ class SofaStorage:
         except:
             raise ValueError("Used an invalid login token!")
 
+
     @classmethod
     def login(cls, username: str, password: str, private: str = None, silent: bool = False):
         key = private if private else KEY
@@ -56,13 +57,18 @@ class SofaStorage:
         except AssertionError:
             raise ValueError("Used an invalid login token!")
 
-    def passwords(self) -> list:
+    def passwords(self):
         return self.base.fetch({'.sofa': '.sofa'})
 
-    def add(self, username, password, website):
+    def find(self, website: str, username: str = None, ):
+        if username:
+            return self.base.fetch({'username', username})
+        return self.base.fetch({'website': website})
+
+    def add(self, username: str, password: str, website: str): 
         '''
         Username can also be the email
         '''
         self.__log__(f'[↑] Saving | {website} | ...')
-        self.base.insert({'username': username, 'password': password, '.sofa': '.sofa'}, website)
+        self.base.insert({'username': username, 'password': password, 'website': website, '.sofa': '.sofa'})
         self.__log__(f'[•] Completed | {website} |')
