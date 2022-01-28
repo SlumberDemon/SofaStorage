@@ -66,7 +66,7 @@ class SofaStorage:
             fetch = self.base.fetch({'username', username})
         else:
             fetch = self.base.fetch({'website': website})
-        return fetch.items
+        self.__log__(fetch.items)
 
     def add(self, username: str, password: str, website: str): 
         '''
