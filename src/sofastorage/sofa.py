@@ -55,3 +55,7 @@ class SofaStorage:
                 raise Exception(f"Account ({username}) doesn't exist!")
         except AssertionError:
             raise ValueError("Used an invalid login token!")
+
+    def passwords(self) -> list:
+        return self.base.fetch({'.sofa': '.sofa'})
+
