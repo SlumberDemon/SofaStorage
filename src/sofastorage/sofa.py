@@ -62,8 +62,7 @@ class SofaStorage:
         try:
             fetch = self.base.fetch({'.sofa': sofa})
             for item in fetch.items:
-                print(f'[•] | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
-                return print(f'[•] Found ({fetch.count}) results')
+                return print(f'[•] Results | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
         except:
             raise Exception('Deta error')
 
@@ -74,7 +73,8 @@ class SofaStorage:
             if website:
                 fetch = self.base.fetch({'website': website})
             for item in fetch.items:
-                return print(f'[•] Results | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')
+                print(f'[•] | ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
+                return print(f'[•] Found ({fetch.count}) results')
         except:
             raise Exception('Missing website or username search query!')
 
