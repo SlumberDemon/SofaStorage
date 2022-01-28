@@ -1,5 +1,3 @@
-import re
-from discord import user
 from .key import KEY
 from deta import Deta
 from typing import Union
