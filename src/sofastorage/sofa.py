@@ -69,7 +69,7 @@ class SofaStorage:
         except AssertionError:
             raise ValueError("Used an invalid login token!")
 
-    def __raw__(self):
+    def all_raw(self):
         '''
         Similar to all() but it returns a Dict for every saved login instead
         :return: SofaStorage object
