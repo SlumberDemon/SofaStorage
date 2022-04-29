@@ -58,7 +58,7 @@ class SofaStorage:
 
     def all(self):
         timer_start = time.perf_counter()
-        fetch = self.base.fetch({'sofastorage': '.sofa'})
+        fetch = self.base.fetch({'sofastorage': '.website'})
         for item in fetch.items:
             print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')    
         timer_end = time.perf_counter()
@@ -79,6 +79,7 @@ class SofaStorage:
                     fetch = self.base.fetch({'website': query})
             timer_start = time.perf_counter()
             for item in fetch.items:
+                print(item)
                 print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')   
             timer_end = time.perf_counter()
             elapsed = f'{timer_end - timer_start:0.4f}'       
@@ -98,7 +99,7 @@ class SofaStorage:
 
         self.__log__(f'[↑] Saving | {website} | ...')
         timer_start = time.perf_counter()
-        self.base.insert({'username': username, 'password': password, 'website': address, 'sofastorage': '.sofa'})
+        self.base.insert({'username': username, 'password': password, 'website': address, 'sofastorage': '.website'})
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f'[•] Completed | {website} | {elapsed}s')
