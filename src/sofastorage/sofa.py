@@ -1,3 +1,4 @@
+from re import T
 import time
 from .key import KEY
 from deta import Deta
@@ -57,27 +58,28 @@ class SofaStorage:
         except AssertionError:
             raise ValueError("Used an invalid login token!")
 
-    def raw(self):
-        """
-        Similar to all() but it returns a Dict for every saved website instead
-        """
+    def __raw__(self):
+        '''
+        Similar to all() but it returns a Dict for every saved login instead
+        :return: SofaStorage object
+        '''
         timer_start = time.perf_counter()
         fetch = self.base.fetch({'sofastorage': '.website'})
         for item in fetch.items:
-            print(item)
+            self.__log__(item)
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'   
-        return print(f'[•] Found {fetch.count} result(s) | {elapsed}s') 
+        self.__log__(f'[•] Found {fetch.count} result(s) | {elapsed}s') 
 
     def all(self):
-        """
-        Returns all saved websites
-        """
+        '''
+        Returns all saved logins
+        :return: SofaStorage object
+        '''
         timer_start = time.perf_counter()
         fetch = self.base.fetch({'sofastorage': '.website'})
         data = []
         for item in fetch.items:
-            # data.append(f"['{item['key']}', '{item['username']}', '{item['password']}', '{item['website']}']")
             store = []
             store.append(item['key'])
             store.append(item['username'])
@@ -86,12 +88,12 @@ class SofaStorage:
             data.append(store)
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
-        print(tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty"))   
-        return print(f'[•] Found {fetch.count} result(s) | {elapsed}s')         
+        self.__log__(tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty"))   
+        self.__log__(f'[•] Found {fetch.count} result(s) | {elapsed}s')         
 
     def find(self, query: str):
         '''
-        Search for passwords
+        Search for logins
         :param query: This can be the website url/name or the websites username
         :return: SofaStorage object
         '''
@@ -107,13 +109,13 @@ class SofaStorage:
                 print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')   
             timer_end = time.perf_counter()
             elapsed = f'{timer_end - timer_start:0.4f}'       
-            return print(f'[•] Found {fetch.count} result(s) | {elapsed}s')
+            self.__log__(f'[•] Found {fetch.count} result(s) | {elapsed}s')
         except:
             raise Exception('Missing website or username search query!')
 
     def add(self, username: str, password: str, website: str): 
         '''
-        Add a website
+        Add a login
         :param username: This can also be an email
         :param password: The password
         :param website: Website url 
@@ -127,3 +129,33 @@ class SofaStorage:
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f'[•] Completed | {website} | {elapsed}s')
+
+    def remove(self, key: str):
+        '''
+        Remove logins
+        :param key: Key from the saved login
+        '''
+        self.base.delete(key)
+        self.__log__(f'[!] Deleted | {key}')
+
+    def download(self):
+        '''
+        Downloads your saved logins as a txt file
+        '''
+        self.__log__(f'[↓] Downloading | ...')
+        timer_start = time.perf_counter()
+        fetch = self.base.fetch({'sofastorage': '.website'})
+        data = []
+        for item in fetch.items:
+            store = []
+            store.append(item['key'])
+            store.append(item['username'])
+            store.append(item['password'])
+            store.append(item['website'])
+            data.append(store)
+        table = tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty")
+        with open('logins.txt', 'x') as f:
+            f.write(table)
+        timer_end = time.perf_counter()
+        elapsed = f'{timer_end - timer_start:0.4f}'
+        self.__log(f"[•] Completed | {elapsed}s")
