@@ -1,6 +1,6 @@
+import time
 from .key import KEY
 from deta import Deta
-from time import perf_counter
 
 class SofaStorage:
     def __init__(self, base: Deta.Base, silent: bool = False):
@@ -74,10 +74,10 @@ class SofaStorage:
                     fetch = self.base.fetch({'username', query})
                 except:
                     fetch = self.base.fetch({'website': query})
-            timer_start = perf_counter()
+            timer_start = time.perf_counter()
             for item in fetch.items:
                 print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')   
-            timer_end = perf_counter()
+            timer_end = time.perf_counter()
             elapsed = round(timer_end - timer_start)         
             return print(f'[•] Found {fetch.count} result(s) | {elapsed}s')
         except:
@@ -94,8 +94,8 @@ class SofaStorage:
         address = website.replace('https://', '').replace('http://', '')
 
         self.__log__(f'[↑] Saving | {website} | ...')
-        timer_start = perf_counter()
+        timer_start = time.perf_counter()
         self.base.insert({'username': username, 'password': password, 'website': address, '.sofa': '.sofa'})
-        timer_end = perf_counter()
+        timer_end = time.perf_counter()
         elapsed = round(timer_end - timer_start)
         self.__log__(f'[•] Completed | {website} | {elapsed}s')
