@@ -78,6 +78,9 @@ class SofaStorage:
         '''
         Username can also be the email
         '''
+         
+        address = website.replace('https://', '').replace('http://', '')
+
         self.__log__(f'[↑] Saving | {website} | ...')
-        self.base.insert({'username': username, 'password': password, 'website': website, '.sofa': '.sofa'})
+        self.base.insert({'username': username, 'password': password, 'website': address, '.sofa': '.sofa'})
         self.__log__(f'[•] Completed | {website} |')
