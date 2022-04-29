@@ -95,7 +95,7 @@ class SofaStorage:
         timer_start = time.perf_counter()
         self.base.insert(
             {'username': username, 'password': password, 'website': address, 'sofastorage': '.website'}
-            )
+        )
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f'[•] Completed | {website} | {elapsed}s')
@@ -119,7 +119,7 @@ class SofaStorage:
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(
             tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty")
-            )   
+        )   
         self.__log__(f'[•] Found {fetch.count} result(s) | {elapsed}s')         
 
     def find(self, query: str):
@@ -145,7 +145,10 @@ class SofaStorage:
                 data.append(store)
                 table = tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty")
             timer_end = time.perf_counter()
-            elapsed = f'{timer_end - timer_start:0.4f}'       
+            elapsed = f'{timer_end - timer_start:0.4f}'      
+            self.__log__(
+                tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty")
+            )    
             self.__log__(f'[•] Found {fetch.count} result(s) | {elapsed}s')
         except:
             raise Exception('Missing website or username search query!')
@@ -163,7 +166,7 @@ class SofaStorage:
         timer_start = time.perf_counter()
         self.base.insert(
             {'username': username, 'password': password, 'website': address, 'sofastorage': '.website'}
-            )
+        )
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f'[•] Completed | {website} | {elapsed}s')
