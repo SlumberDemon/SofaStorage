@@ -5,9 +5,10 @@ from deta import Deta
 from tabulate import tabulate
 
 class SofaStorage:
-    def __init__(self, base: Deta.Base, silent: bool = False):
+    def __init__(self, base: Deta.Base, silent: bool = False, local: bool = False):
         self.base = base
         self.silent = silent
+        self.local = local
 
     def __repr__(self):
         return f"<SofaStorage>"
@@ -19,7 +20,7 @@ class SofaStorage:
     
 
     @classmethod
-    def create(cls, username: str, password: str, private: str = None, silent: bool = False):
+    def create(cls, username: str, password: str, private: str = None, silent: bool = False, local: bool = False):
         key = private if private else KEY
         if len(username) < 5:
             raise ValueError("Use at least 5 characters!")
