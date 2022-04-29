@@ -75,10 +75,11 @@ class SofaStorage:
             raise Exception('Missing website or username search query!')
 
     def add(self, username: str, password: str, website: str): 
+
         '''
         Username can also be the email
         '''
-         
+
         address = website.replace('https://', '').replace('http://', '')
 
         self.__log__(f'[↑] Saving | {website} | ...')
