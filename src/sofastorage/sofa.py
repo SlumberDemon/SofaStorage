@@ -34,7 +34,7 @@ class SofaStorage:
                 return cls.login(username, password, private, silent)
             if not silent:
                 print(f'Account ({username}) created!')
-            storage = base.put({'sofastorage':'.sofa'}, key='sofastorage')
+            storage = base.put({'sofastorage':'.sofa'}, key='.sofa')
             return cls(base=base, silent=silent)
         except:
             raise ValueError("Used an invalid login token!")
@@ -98,7 +98,7 @@ class SofaStorage:
 
         self.__log__(f'[↑] Saving | {website} | ...')
         timer_start = time.perf_counter()
-        self.base.insert({'username': username, 'password': password, 'website': address, '.sofa': '.sofa'})
+        self.base.insert({'username': username, 'password': password, 'website': address, 'sofastorage': '.sofa'})
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f'[•] Completed | {website} | {elapsed}s')
