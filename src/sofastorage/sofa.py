@@ -61,7 +61,8 @@ class SofaStorage:
         fetch = self.base.fetch({'sofastorage': '.sofa'})
         self.__log__('Base FETCHED...')
         for item in fetch.items:
-            print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
+            #print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')    
+            print(item)        
             self.__log__('Website FETCHED')
         return print(f'[•] Found {fetch.count} result(s)')         
 
