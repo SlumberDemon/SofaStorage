@@ -34,7 +34,7 @@ class SofaStorage:
                 return cls.login(username, password, private, silent)
             if not silent:
                 print(f'Account ({username}) created!')
-            storage = base.put({'.sofa':'.sofa'}, key='.sofa')
+            storage = base.put({'sofastorage':'.sofa'}, key='sofastorage')
             return cls(base=base, silent=silent)
         except:
             raise ValueError("Used an invalid login token!")
@@ -45,7 +45,7 @@ class SofaStorage:
         key = private if private else KEY
         try:
             base = Deta(key).Base(f'{username}-{password}')
-            sofa = base.get(key='.sofa')
+            sofa = base.get(key='sofastorage')
             if sofa:
                 if not silent:
                     print(f"Logged in as ({username})")
@@ -58,7 +58,7 @@ class SofaStorage:
 
     def all(self):
         self.__log__('Starting FETCHER...')
-        fetch = self.base.fetch({'.sofa': '.sofa'})
+        fetch = self.base.fetch({'sofastorage': '.sofa'})
         self.__log__('Base FETCHED...')
         for item in fetch.items:
             print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
