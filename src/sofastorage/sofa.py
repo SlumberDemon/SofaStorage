@@ -63,7 +63,7 @@ class SofaStorage:
         timer_start = time.perf_counter()
         fetch = self.base.fetch({'sofastorage': '.website'})
         for item in fetch.items:
-            print(f'| {item["key"]} | {item["username"]} | item["password"] | {item["website"]} |')    
+            print(f'| {item["key"]} | {item["username"]} | {item["password"]} | {item["website"]} |')    
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'   
         print('-----------------------------------------------')
