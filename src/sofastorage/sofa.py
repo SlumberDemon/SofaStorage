@@ -56,7 +56,23 @@ class SofaStorage:
         except AssertionError:
             raise ValueError("Used an invalid login token!")
 
+    def raw(self):
+        """
+        Similar to all() but it returns a Dict for every saved website instead
+        """
+        timer_start = time.perf_counter()
+        fetch = self.base.fetch({'sofastorage': '.website'})
+        for item in fetch.items:
+            print(item)
+        timer_end = time.perf_counter()
+        elapsed = f'{timer_end - timer_start:0.4f}'   
+        print('-----------------------------------------------')
+        return print(f'[•] Found {fetch.count} result(s) | {elapsed}s') 
+
     def all(self):
+        """
+        Returns all saved websites
+        """
         print('-----------------------------------------------')
         print('|  Key  |  Username  |  Password  |  Website  |')
         print('-----------------------------------------------')
