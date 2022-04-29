@@ -78,7 +78,7 @@ class SofaStorage:
             for item in fetch.items:
                 print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')   
             timer_end = time.perf_counter()
-            elapsed = round(timer_end - timer_start)         
+            elapsed = f'{timer_end - timer_start:0.4f}'       
             return print(f'[•] Found {fetch.count} result(s) | {elapsed}s')
         except:
             raise Exception('Missing website or username search query!')
@@ -97,5 +97,5 @@ class SofaStorage:
         timer_start = time.perf_counter()
         self.base.insert({'username': username, 'password': password, 'website': address, '.sofa': '.sofa'})
         timer_end = time.perf_counter()
-        elapsed = round(timer_end - timer_start)
+        elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f'[•] Completed | {website} | {elapsed}s')
