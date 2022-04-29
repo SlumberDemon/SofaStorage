@@ -45,7 +45,7 @@ class SofaStorage:
         key = private if private else KEY
         try:
             base = Deta(key).Base(f'{username}-{password}')
-            sofa = base.get(key='sofastorage')
+            sofa = base.get(key='.sofa')
             if sofa:
                 if not silent:
                     print(f"Logged in as ({username})")
