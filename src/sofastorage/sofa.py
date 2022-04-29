@@ -82,6 +82,22 @@ class SofaStorage:
         elapsed = f'{timer_end - timer_start:0.4f}'   
         self.__log__(f'[•] Found {fetch.count} result(s) | {elapsed}s') 
 
+
+    def interactive(self):
+        '''
+        Interactive login saving
+        '''
+        username = input('Username: ')
+        password = input('Password: ')
+        website = input('Website: ')
+        address = website.replace('https://', '').replace('http://', '')
+        self.__log__(f'[↑] Saving | {website} | ...')
+        timer_start = time.perf_counter()
+        self.base.insert({'username': username, 'password': password, 'website': address, 'sofastorage': '.website'})
+        timer_end = time.perf_counter()
+        elapsed = f'{timer_end - timer_start:0.4f}'
+        self.__log__(f'[•] Completed | {website} | {elapsed}s')
+
     def all(self):
         '''
         Returns all saved logins
@@ -133,7 +149,6 @@ class SofaStorage:
         :return: SofaStorage object
         '''
         address = website.replace('https://', '').replace('http://', '')
-
         self.__log__(f'[↑] Saving | {website} | ...')
         timer_start = time.perf_counter()
         self.base.insert({'username': username, 'password': password, 'website': address, 'sofastorage': '.website'})
