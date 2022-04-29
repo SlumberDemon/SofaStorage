@@ -1,5 +1,5 @@
-from re import T
 import time
+import os.path
 from .key import KEY
 from deta import Deta
 from tabulate import tabulate
@@ -154,8 +154,13 @@ class SofaStorage:
             store.append(item['website'])
             data.append(store)
         table = tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty")
-        with open('logins.txt', 'x') as f:
-            f.write(table)
+        file = os.path.exists('logins.txt')
+        if file == True:
+            with open('file.txt', 'r+') as f:
+                f.write(table)
+        elif file == False:
+            with open('logins.txt', 'x') as f:
+                f.write(table)
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f"[•] Completed | {elapsed}s")
