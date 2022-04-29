@@ -158,4 +158,4 @@ class SofaStorage:
             f.write(table)
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
-        self.__log(f"[•] Completed | {elapsed}s")
+        self.__log__(f"[•] Completed | {elapsed}s")
