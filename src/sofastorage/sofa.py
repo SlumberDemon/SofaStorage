@@ -17,6 +17,14 @@ class SofaStorage:
         if not self.silent:
             print(prompt)
 
+    def __local__(self, table: str) -> None:
+        file = os.path.exists('logins.txt')
+        if file == True:
+            with open('logins.txt', 'r+') as f:
+                f.write(table)
+        elif file == False:
+            with open('logins.txt', 'x') as f:
+                f.write(table)
     
 
     @classmethod
@@ -155,13 +163,8 @@ class SofaStorage:
             store.append(item['website'])
             data.append(store)
         table = tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty")
-        file = os.path.exists('logins.txt')
-        if file == True:
-            with open('file.txt', 'r+') as f:
-                f.write(table)
-        elif file == False:
-            with open('logins.txt', 'x') as f:
-                f.write(table)
+        if not self.local:
+            self.__local__(table)
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f"[•] Completed | {elapsed}s")
