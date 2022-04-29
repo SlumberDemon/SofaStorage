@@ -6,6 +6,8 @@ Easy to use password manager
 
 Making this public so I can test it!
 
+Also a lot of the code was based of AirDrives code!
+
 ## Todo:
 - [x] Remove https and http from website url 
 - [ ] Turn key into number line
