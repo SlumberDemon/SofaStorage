@@ -57,16 +57,16 @@ class SofaStorage:
             raise ValueError("Used an invalid login token!")
 
     def all(self):
-        print('---------------------------------')
-        print('| Username | Password | Website |')
-        print('---------------------------------')
+        print('-----------------------------------------------')
+        print('|  Key  |  Username  |  Password  |  Website  |')
+        print('-----------------------------------------------')
         timer_start = time.perf_counter()
         fetch = self.base.fetch({'sofastorage': '.website'})
         for item in fetch.items:
-            print(f'| [{item["key"]}] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')    
+            print(f'| {item["key"]} | {item["username"]} | item["password"] | {item["website"]} |')    
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'   
-        print('---------------------------------')
+        print('-----------------------------------------------')
         return print(f'[•] Found {fetch.count} result(s) | {elapsed}s')         
 
     def find(self, query: str):
