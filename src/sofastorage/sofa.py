@@ -1,6 +1,6 @@
 from .key import KEY
 from deta import Deta
-from typing import Union
+from time import perf_counter
 
 class SofaStorage:
     def __init__(self, base: Deta.Base, silent: bool = False):
@@ -62,12 +62,18 @@ class SofaStorage:
             print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
         return print(f'[•] Found {fetch.count} result(s)')         
 
-    def find(self, website: str = None, username: str = None):
+    def find(self, query: str):
+        '''
+        Search for passwords
+        :param query: This can be the website url/name or the websites username
+        :return: SofaStorage object
+        '''
         try:
-            if username:
-                fetch = self.base.fetch({'username', username})
-            if website:
-                fetch = self.base.fetch({'website': website})
+            if query:
+                try:
+                    fetch = self.base.fetch({'username', query})
+                except:
+                    fetch = self.base.fetch({'website': query})
             for item in fetch.items:
                 print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
             return print(f'[•] Found {fetch.count} result(s)')
@@ -75,13 +81,18 @@ class SofaStorage:
             raise Exception('Missing website or username search query!')
 
     def add(self, username: str, password: str, website: str): 
-
         '''
-        Username can also be the email
+        Add a website
+        :param username: This can also be an email
+        :param password: The password
+        :param website: Website url 
+        :return: SofaStorage object
         '''
-
         address = website.replace('https://', '').replace('http://', '')
 
         self.__log__(f'[↑] Saving | {website} | ...')
+        timer_start = perf_counter()
         self.base.insert({'username': username, 'password': password, 'website': address, '.sofa': '.sofa'})
-        self.__log__(f'[•] Completed | {website} |')
+        timer_end = perf_counter()
+        elapsed = round(timer_end - timer_start)
+        self.__log__(f'[•] Completed | {website} | {elapsed}s')
