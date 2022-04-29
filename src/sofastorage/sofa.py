@@ -74,9 +74,12 @@ class SofaStorage:
                     fetch = self.base.fetch({'username', query})
                 except:
                     fetch = self.base.fetch({'website': query})
+            timer_start = perf_counter()
             for item in fetch.items:
-                print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')            
-            return print(f'[•] Found {fetch.count} result(s)')
+                print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')   
+            timer_end = perf_counter()
+            elapsed = round(timer_end - timer_start)         
+            return print(f'[•] Found {fetch.count} result(s) | {elapsed}s')
         except:
             raise Exception('Missing website or username search query!')
 
