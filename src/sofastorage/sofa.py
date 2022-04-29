@@ -1,6 +1,7 @@
 import time
 from .key import KEY
 from deta import Deta
+from tabulate import tabulate
 
 class SofaStorage:
     def __init__(self, base: Deta.Base, silent: bool = False):
@@ -72,16 +73,20 @@ class SofaStorage:
         """
         Returns all saved websites
         """
-        print('-----------------------------------------------')
-        print('|  Key  |  Username  |  Password  |  Website  |')
-        print('-----------------------------------------------')
         timer_start = time.perf_counter()
         fetch = self.base.fetch({'sofastorage': '.website'})
+        data = []
         for item in fetch.items:
-            print(f'| {item["key"]} | {item["username"]} | {item["password"]} | {item["website"]} |')    
+            # data.append(f"['{item['key']}', '{item['username']}', '{item['password']}', '{item['website']}']")
+            store = []
+            store.append(item['key'])
+            store.append(item['username'])
+            store.append(item['password'])
+            store.append(item['website'])
+            data.append(store)
         timer_end = time.perf_counter()
-        elapsed = f'{timer_end - timer_start:0.4f}'   
-        print('-----------------------------------------------')
+        elapsed = f'{timer_end - timer_start:0.4f}'
+        print(tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty"))   
         return print(f'[•] Found {fetch.count} result(s) | {elapsed}s')         
 
     def find(self, query: str):
