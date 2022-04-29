@@ -93,7 +93,9 @@ class SofaStorage:
         address = website.replace('https://', '').replace('http://', '')
         self.__log__(f'[↑] Saving | {website} | ...')
         timer_start = time.perf_counter()
-        self.base.insert({'username': username, 'password': password, 'website': address, 'sofastorage': '.website'})
+        self.base.insert(
+            {'username': username, 'password': password, 'website': address, 'sofastorage': '.website'}
+            )
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f'[•] Completed | {website} | {elapsed}s')
@@ -115,7 +117,9 @@ class SofaStorage:
             data.append(store)
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
-        self.__log__(tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty"))   
+        self.__log__(
+            tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty")
+            )   
         self.__log__(f'[•] Found {fetch.count} result(s) | {elapsed}s')         
 
     def find(self, query: str):
@@ -131,9 +135,15 @@ class SofaStorage:
                 except:
                     fetch = self.base.fetch({'website': query})
             timer_start = time.perf_counter()
+            data = []
             for item in fetch.items:
-                print(item)
-                print(f'[↓] ' + item['username'] + ' | ' + item['password'] + ' | ' + item['website'] + ' | ')   
+                store = []
+                store.append(item['key'])
+                store.append(item['username'])
+                store.append(item['password'])
+                store.append(item['website'])
+                data.append(store)
+                table = tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty")
             timer_end = time.perf_counter()
             elapsed = f'{timer_end - timer_start:0.4f}'       
             self.__log__(f'[•] Found {fetch.count} result(s) | {elapsed}s')
@@ -151,7 +161,9 @@ class SofaStorage:
         address = website.replace('https://', '').replace('http://', '')
         self.__log__(f'[↑] Saving | {website} | ...')
         timer_start = time.perf_counter()
-        self.base.insert({'username': username, 'password': password, 'website': address, 'sofastorage': '.website'})
+        self.base.insert(
+            {'username': username, 'password': password, 'website': address, 'sofastorage': '.website'}
+            )
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f'[•] Completed | {website} | {elapsed}s')
