@@ -1,36 +1,25 @@
 import time
 import os.path
+
+from matplotlib.pyplot import table
 from .key import KEY
 from deta import Deta
 from tabulate import tabulate
 
-class SofaStorage:
-    def __init__(self, base: Deta.Base, silent: bool = False, local: bool = False):
+class Online:
+    def __init__(self, base: Deta.Base, silent: bool = False):
         self.base = base
         self.silent = silent
-        self.local = local
 
     def __repr__(self):
         return f"<SofaStorage>"
 
     def __log__(self, prompt: str) -> None:
         if not self.silent:
-            print(prompt)
-
-    def __local__(self, table: str) -> None:
-        if self.local:
-            file = os.path.exists('logins.txt')
-            if file == True:
-                with open('logins.txt', 'r+') as f:
-                    f.truncate()
-                    f.write(table)
-            elif file == False:
-                with open('logins.txt', 'x') as f:
-                    f.write(table)
-    
+            print(prompt)    
 
     @classmethod
-    def create(cls, username: str, password: str, private: str = None, silent: bool = False, local: bool = False):
+    def create(cls, username: str, password: str, private: str = None, silent: bool = False):
         key = private if private else KEY
         if len(username) < 5:
             raise ValueError("Use at least 5 characters!")
@@ -201,3 +190,46 @@ class SofaStorage:
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f"[•] Completed | {elapsed}s")
+
+
+class Local:
+    def __init__(self, silent: bool = False, local: bool = False):
+        self.silent = silent
+        self.local = local
+
+    def __repr__(self):
+        return f"<SofaStorage>"
+
+    def __log__(self, prompt: str) -> None:
+        if not self.silent:
+            print(prompt)    
+
+    def __local__(self, table: str) -> None:
+        if self.local:
+            file = os.path.exists('logins.txt')
+            if file == True:
+                with open('logins.txt', 'r+') as f:
+                    f.truncate()
+                    f.write(table)
+            elif file == False:
+                with open('logins.txt', 'x') as f:
+                    f.write(table)
+
+    @classmethod
+    def manager(silent: bool = False, local: bool = False):
+        if not silent:
+            print(f"Local SofaStorage")
+            print('-------')
+
+    def setup(self):
+        '''
+        Creates txt file for local password manager
+        '''
+        timer_start = time.perf_counter()
+        self.__log__(f'[↑] Setting up local | ...')
+        data = ''
+        table = tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty")
+        self.local(table)
+        timer_end = time.perf_counter()
+        elapsed = f'{timer_end - timer_start:0.4f}'
+        self.__log__(f'[•] Setup completed | {elapsed}s')
