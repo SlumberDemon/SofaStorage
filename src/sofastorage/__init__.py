@@ -19,4 +19,4 @@ SOFTWARE.
 '''
 
 
-from .sofa import SofaStorage
+from .sofa import Online, Local
