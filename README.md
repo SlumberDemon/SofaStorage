@@ -16,3 +16,16 @@ Also a lot of the code was based of AirDrives code!
 - [ ] Add ability to download saved passwords in a txt file 
 - [ ] Add local = True, which enables local password manager using logins.txt file instead of online db
 - [ ] Maybe make it eaiser to navigate between local and online password manager also polish interactive password creation
+- [ ] Finish Local sofastorage
+
+## Working Features:
+- [x] Account Creation
+- [x] Logining in
+- [x] Private Datebase
+#### After Login
+   - [x] Adding Logins
+   - [x] Removing Logins
+   - [x] Interactive Login Creation
+   - [x] Finding Logins
+   - [x] Getting All Logins
+   - [x] Download Logins As Text File
