@@ -22,7 +22,7 @@ Also a lot of the code was based of AirDrives code!
 - [x] Account Creation
 - [x] Logining in
 - [x] Private Datebase
-#### After Login
+#### Actions After Logining Into SofaStorage
    - [x] Adding Logins
    - [x] Removing Logins
    - [x] Interactive Login Creation
