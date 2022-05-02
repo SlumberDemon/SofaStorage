@@ -20,12 +20,15 @@ Also a lot of the code was based of AirDrives code!
 
 ## Working Features:
 - [x] Account Creation
-- [x] Logining in
+- [x] Logining In
 - [x] Private Datebase
-#### Actions After Logining Into SofaStorage
+- [x] Local Manager
+#### Online
    - [x] Adding Logins
    - [x] Removing Logins
    - [x] Interactive Login Creation
    - [x] Finding Logins
    - [x] Getting All Logins
    - [x] Download Logins As Text File
+#### Local
+   - [x] Setup
