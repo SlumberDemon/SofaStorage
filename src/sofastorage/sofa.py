@@ -1,7 +1,5 @@
 import time
 import os.path
-
-from matplotlib.pyplot import table
 from .key import KEY
 from deta import Deta
 from tabulate import tabulate
