@@ -1,6 +1,36 @@
 # SofaStorage
 Easy to use password manager
 
+## Installation
+
+```py
+pip install git+https://github.com/SlumberDemon/SofaStorage
+```
+
+## Examples
+
+#### Online
+
+```py
+from sofastorage import Online
+
+sofa = Online.create('USERNAME', 'PASSWORD')
+
+sofa.add('Many', '12345678', 'https://bob.com')
+
+sofa.find('bob.com')
+```
+
+#### Local
+
+```py
+from sofastorage import Local
+
+sofa = Local.manager()
+
+sofa.interactive()
+```
+
 
 ### WORK IN PROGESS ###
 
@@ -26,9 +56,10 @@ Also a lot of the code was based of AirDrives code!
 #### Online
    - [x] Adding Logins
    - [x] Removing Logins
-   - [x] Interactive Login Creation
+   - [x] Interactive 
    - [x] Finding Logins
    - [x] Getting All Logins
    - [x] Download Logins As Text File
 #### Local
    - [x] Setup
+   - [x] Interactive 
