@@ -14,9 +14,15 @@ pip install git+https://github.com/SlumberDemon/SofaStorage
 ```py
 from sofastorage import Online
 
+# Create Account
+
 sofa = Online.create('USERNAME', 'PASSWORD')
 
-sofa.add('Many', '12345678', 'https://bob.com')
+# Add Logins 
+
+sofa.add('USERNAME', 'PASSWORD', 'https://bob.com')
+
+# Find Logins
 
 sofa.find('bob.com')
 ```
@@ -26,7 +32,15 @@ sofa.find('bob.com')
 ```py
 from sofastorage import Local
 
+# Launch into Local mode
+
 sofa = Local.manager()
+
+# Easy setup (not required)
+
+sofa.setup()
+
+# Interactive way of adding logins
 
 sofa.interactive()
 ```
