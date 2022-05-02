@@ -214,10 +214,11 @@ class Local:
                     f.write(table)
 
     @classmethod
-    def manager(self, silent: bool = False, local: bool = False):
+    def manager(cls, silent: bool = False, local: bool = False):
         if not silent:
             print(f"Local SofaStorage")
             print('-------')
+            return cls(local=local, silent=silent)
 
     def setup(self):
         '''
