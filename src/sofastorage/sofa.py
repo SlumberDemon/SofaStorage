@@ -225,10 +225,27 @@ class Local:
         Creates txt file for local password manager
         '''
         timer_start = time.perf_counter()
-        self.__log__(f'[↑] Setting up local | ...')
+        self.__log__(f'[↓] Setting up local | ...')
         data = ''
-        table = tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty")
+        table = tabulate(data, headers=["Username", "Password", "Website"], tablefmt="pretty")
         self.__local__(table)
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f'[•] Setup completed | {elapsed}s')
+
+    def interactive(self):
+        '''
+        Interactive login saving
+        '''
+        username = input('Username: ')
+        password = input('Password: ')
+        website = input('Website: ')
+        address = website.replace('https://', '').replace('http://', '')
+        self.__log__(f'[↓] Saving | {website} | ...')
+        timer_start = time.perf_counter()
+        data = [[username, password, address]]
+        table = tabulate(data, headers=["Username", "Password", "Website"], tablefmt="pretty")
+        self.__local__(table)
+        timer_end = time.perf_counter()
+        elapsed = f'{timer_end - timer_start:0.4f}'
+        self.__log__(f'[•] Completed | {website} | {elapsed}s')
