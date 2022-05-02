@@ -22,6 +22,10 @@ sofa = Online.create('USERNAME', 'PASSWORD')
 
 sofa.add('USERNAME', 'PASSWORD', 'https://bob.com')
 
+# All Saved Logins
+
+sofa.all()
+
 # Find Logins
 
 sofa.find('bob.com')
