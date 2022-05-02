@@ -203,7 +203,7 @@ class Local:
             print(prompt)    
 
     def __local__(self, table: str) -> None:
-        if self.local:
+        if not self.local:
             file = os.path.exists('logins.txt')
             if file == True:
                 with open('logins.txt', 'r+') as f:
