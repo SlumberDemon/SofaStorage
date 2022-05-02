@@ -203,7 +203,7 @@ class Local:
             print(prompt)    
 
     def __local__(self, table: str) -> None:
-        if not self.local:
+        if self.local == True:
             file = os.path.exists('logins.txt')
             if file == True:
                 with open('logins.txt', 'r+') as f:
@@ -214,7 +214,7 @@ class Local:
                     f.write(table)
 
     @classmethod
-    def manager(cls, silent: bool = False, local: bool = False):
+    def manager(cls, silent: bool = False, local: bool = True):
         if not silent:
             print(f"Local SofaStorage")
             print('-------')
