@@ -228,7 +228,7 @@ class Local:
         self.__log__(f'[↑] Setting up local | ...')
         data = ''
         table = tabulate(data, headers=["Key", "Username", "Password", "Website"], tablefmt="pretty")
-        self.local(table)
+        self.__local__(table)
         timer_end = time.perf_counter()
         elapsed = f'{timer_end - timer_start:0.4f}'
         self.__log__(f'[•] Setup completed | {elapsed}s')
