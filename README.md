@@ -63,7 +63,7 @@ Also a lot of the code was based of AirDrives code!
 - [ ] Remove storage in main db make it private db online for more security
 - [x] Add ability to download saved passwords in a txt file 
 - [x] Maybe make it eaiser to navigate between local and online password manager also polish interactive password creation
-- [ ] ADd validation to check if website link is real website link
+- [ ] Add validation to check if website link is real website link
 - [ ] Finish Local sofastorage
 
 ## Working Features:
