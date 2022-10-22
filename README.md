@@ -4,6 +4,12 @@ Easy to use password manager
 ## Installation
 
 ```py
+pip install sofastorage
+```
+
+#### Latest
+
+```py
 pip install git+https://github.com/SlumberDemon/SofaStorage
 ```
 
